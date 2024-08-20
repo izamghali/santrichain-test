@@ -1,8 +1,13 @@
+import ProductBlock from "@/components/custom/item/ProductBlock";
 
 export default function Home() {
     return (
-        <main className="bg-violet-400">
-            <span >Hello world!</span>
+        <main className="">
+            {/* filter item */}
+
+            <div className="flex justify-center">
+                <ProductBlock />
+            </div>
         </main>
     );
 }
