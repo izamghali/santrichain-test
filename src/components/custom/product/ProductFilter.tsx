@@ -5,13 +5,13 @@ import ProductMobileFilter from "./filter/ProductMobileFilter"
 import ProductMobileSortFilter from "./filter/ProductMobileSortFilter"
 import ProductSortMenu from "./filter/ProductSortMenu"
 
-export default function ProductFilter() {
+export default function ProductFilter({ selectedSortOption, setSelectedSortOption }: { selectedSortOption:string, setSelectedSortOption:any }) {
     return (
         <div className="p-2 md:p-4 min-w-64 space-y-4 bg-white">
             <div className="mb-0 md:mb-8 max-md:flex max-md:justify-between">
                 <h2 className="font-bold">Filter</h2>
                 <div className="md:hidden space-x-2 flex items-center">
-                    <ProductMobileSortFilter />
+                    <ProductMobileSortFilter selectedSortOption={selectedSortOption} setSelectedSortOption={setSelectedSortOption} />
                     <ProductMobileFilter />
                 </div>
             </div>
@@ -31,11 +31,6 @@ export default function ProductFilter() {
                     </AccordionContent>
                 </AccordionItem>
             </Accordion>
-
-            <div className="max-md:hidden lg:hidden">
-                <h2 className="mb-4 font-bold">Sort</h2>
-                <ProductSortMenu />
-            </div>
         </div>
     )
 };

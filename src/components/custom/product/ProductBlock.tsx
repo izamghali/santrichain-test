@@ -1,13 +1,15 @@
-'use client'
 import React, { useEffect, useState } from "react"
 import { ProductCard } from "./ProductCard"
 import { Product } from "@/lib/constant"
 import { Skeleton } from "@/components/ui/skeleton"
 import ProductLimitFilter from "./filter/ProductLimitFilter"
 import ProductSortFilter from "./filter/ProductSortFilter"
-import { CataloguePagination } from "../Pagination"
+import { CataloguePagination } from "../CataloguePagination"
+import ProductMobileSortFilter from "./filter/ProductMobileSortFilter"
 
-export default function ProductBlock({ products }: { products: Product[] | [] }) {
+export default function ProductBlock(
+    { products, setSelectedLimit, selectedSortOption, setSelectedSortOption, selectedPage, setSelectedPage, selectedTotalPage }: 
+    { products: Product[], setSelectedLimit: any, selectedSortOption: string, setSelectedSortOption:any, selectedPage: number, setSelectedPage:any, selectedTotalPage: number }) {
 
     const [ isLoading, setIsLoading ] = useState(false);
 
@@ -21,10 +23,13 @@ export default function ProductBlock({ products }: { products: Product[] | [] })
         <div className="std-max-w md:w-fit w-full px-4 space-y-4">
             <div className="flex items-center justify-between">
                 <div className="max-md:hidden">
-                    <ProductLimitFilter/>
+                    <ProductLimitFilter setSelectedLimit={setSelectedLimit}/>
                 </div>
                 <div className="max-lg:hidden">
-                    <ProductSortFilter />
+                    <ProductSortFilter selectedSortOption={selectedSortOption} setSelectedSortOption={setSelectedSortOption} />
+                </div>
+                <div className="lg:hidden max-md:hidden">
+                    <ProductMobileSortFilter selectedSortOption={selectedSortOption} setSelectedSortOption={setSelectedSortOption} />
                 </div>
             </div>
 
@@ -57,7 +62,7 @@ export default function ProductBlock({ products }: { products: Product[] | [] })
             </div>
 
             <div className="max-md:hidden">
-                <CataloguePagination />
+                <CataloguePagination selectedPage={selectedPage} setSelectedPage={setSelectedPage} selectedTotalPage={selectedTotalPage} />
             </div>
         </div>
     )

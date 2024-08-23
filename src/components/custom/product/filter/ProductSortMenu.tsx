@@ -2,9 +2,9 @@ import { Label } from "@/components/ui/label"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import React from "react"
 
-export default function ProductSortMenu() {
+export default function ProductSortMenu({ selectedSortOption, setSelectedSortOption }: { selectedSortOption: string, setSelectedSortOption:any }) {
     return (
-        <RadioGroup defaultValue="-stock" className="space-y-2 max-md:space-y-4">
+        <RadioGroup onValueChange={(value) => setSelectedSortOption(value)} defaultValue={selectedSortOption} className="space-y-2 max-md:space-y-4">
             <div className="flex items-center space-x-2">
                 <RadioGroupItem value="-stock" id="r1" />
                 <Label className="text-black/60" htmlFor="r1">Availability</Label>

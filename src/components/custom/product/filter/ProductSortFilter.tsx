@@ -2,11 +2,11 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from "@/compon
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import React from "react"
 
-export default function ProductSortFilter() {
+export default function ProductSortFilter({ selectedSortOption, setSelectedSortOption }: { selectedSortOption:string, setSelectedSortOption:any }) {
     return (
         <div className="flex items-center gap-2">
             <span>Sort by:</span>
-            <Select defaultValue="-stock">
+            <Select onValueChange={(value) => setSelectedSortOption(value)} defaultValue={selectedSortOption}>
                 <SelectTrigger className="w-[180px]">
                     <SelectValue placeholder="Availability"/>
                 </SelectTrigger>

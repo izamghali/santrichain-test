@@ -1,22 +1,18 @@
 import CatalogueParticles from "@/components/custom/CatalogueParticles";
-import ProductBlock from "@/components/custom/product/ProductBlock";
-import ProductDashboard from "@/components/custom/product/ProductDashboard";
+import ProductSection from "@/components/custom/product/ProductSection";
 import { Product } from "@/lib/constant";
+import { url } from "@/lib/utils";
 
 export default async function Home() {
-    const url = `https://api-dev-konteks.santrichain.id/api/v1/catalogue`
-    const res = await (await fetch(`${url}?category=kebutuhan-rumah&page=1&limit=12&sort_by=-stock&platform=b2b`)).json()
-    const products: Product[] = res.data.products
+
+    const res = await (await fetch(`${url}?category=kebutuhan-rumah&page=1&limit=12&sort_by=-stock&platform=b2b`)).json();
+    const productData: Product[] = res.data.products
+    const totalPage: number = res.data.total_pages 
 
     return (
         <main className="">
             <CatalogueParticles />
-            <div className="flex justify-center max-md:flex-col py-8">
-                <div className="sticky top-[8.36rem] z-10">
-                    <ProductDashboard />
-                </div>
-                <ProductBlock products={ products && products.length > 0 ? products : [] } />
-            </div>
+            <ProductSection totalPage={totalPage} products={productData} />
         </main>
     );
 }
