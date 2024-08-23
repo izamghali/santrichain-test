@@ -22,8 +22,8 @@ import SearchBar from "./SearchBar"
 export function Header() {
 
     return (
-        <NavigationMenu>
-            <NavigationMenuList className="md:border-b-2 flex max-md:flex-col max-md:items-start w-screen justify-between gap-6 p-4 max-md:bg-std">
+        <NavigationMenu className="sticky top-0 bg-white z-20">
+            <NavigationMenuList className="md:border-b-[1px] flex max-md:flex-col max-md:items-start w-screen justify-between gap-6 p-4 max-md:bg-std">
                 <div className="flex items-center max-md:justify-between max-md:w-full gap-6">
                     <NavigationMenuItem>
                         <Link href={'/'}>
@@ -32,13 +32,12 @@ export function Header() {
                                 className="bg-std p-2 rounded-sm min-w-40"
                                 width={180}
                                 height={180}
-                                // src={"https://marketplace.santrichain.id/_next/image?url=%2Fassets%2Fimages%2Fsc-logo-green.png&w=640&q=75"}
                                 src={"https://marketplace.santrichain.id/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Flogo-sc-beta.589013b2.png&w=256&q=75"}
                                 alt={"santrichain-logo"}
                             />
                         </Link>
                     </NavigationMenuItem>
-                    <NavigationMenuItem className="max-md:hidden font-light"><Link href={'/catalog'}>Catalog</Link></NavigationMenuItem>
+                    {/* <NavigationMenuItem className="max-md:hidden font-light"><Link href={'/catalog'}>Category</Link></NavigationMenuItem> */}
                     <MobileDrawer />
                 </div>
                 <NavigationMenuItem className="text-md max-w-[50rem] w-full">
