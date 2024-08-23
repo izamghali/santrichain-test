@@ -13,7 +13,7 @@ export default function MobileDrawer() {
             <SheetContent className="p-0" side={'right'}>
                 <div className="w-full bg-std h-[8rem] relative">
                     <SheetTitle className="absolute left-2 bottom-5">
-                        <Image priority className=" min-w-20"
+                        <Image priority className="w-auto h-auto min-w-20"
                             width={180} height={180}
                             src={"https://marketplace.santrichain.id/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Flogo-sc-beta.589013b2.png&w=256&q=75"}
                             alt={"santrichain-logo"}
