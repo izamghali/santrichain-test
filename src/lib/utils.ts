@@ -16,6 +16,13 @@ export function formatToIDR(amount: number) {
     }).format(amount);
 }
 
+export function truncateString(str: string, maxLength = 26) {
+    if (str.length > maxLength) {
+      return str.substring(0, maxLength) + '...';
+    }
+    return str;
+}
+
 export function handleCheckboxChange(e: React.MouseEvent<HTMLButtonElement>, setState: React.Dispatch<React.SetStateAction<string[]>>) {
     const target = e.target as HTMLButtonElement;
     const checked = target.ariaChecked

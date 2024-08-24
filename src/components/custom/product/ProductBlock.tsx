@@ -42,7 +42,9 @@ export default function ProductBlock(
                                     name={product.name}
                                     imgUrl={product.image_urls[0]}
                                     slug={product.slug}
-                                    // price={product.stock != 0 ? product.price_range.min : 0}
+                                    price={product?.price_range?.min || product.price || 0}
+                                    // price={product.stock != 0 || product.price != null ? product.price_range.min || product.price : 0}
+                                    slashPrice={product.price_range?.max || product.price || 0}
                                     // slashPrice={product.stock != 0 ? product.price_range.min_slash || product.price_range.max : 0}
                                     stock={product.stock}                           />
                             </div>
