@@ -2,8 +2,14 @@ import { PiSlidersHorizontal } from "react-icons/pi"
 import ProductCategoryMenu from "./ProductMobileMenu"
 import { Sheet, SheetContent, SheetDescription, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
 import CustomCheckBox from "@/components/dynamic/CustomCheckBox"
+import { handleCheckboxChange } from "@/lib/utils"
 
-export default function ProductMobileFilter() {
+export default function ProductMobileFilter({ setSelectedPlatform, setSelectedCategory }: { setSelectedPlatform:React.Dispatch<React.SetStateAction<string[]>>, setSelectedCategory: React.Dispatch<React.SetStateAction<string[]>> }) {
+
+    function handleChange(e: React.MouseEvent<HTMLButtonElement>) {
+        handleCheckboxChange(e, setSelectedPlatform)
+    }
+
     return (
         <>
             <Sheet>
@@ -17,13 +23,13 @@ export default function ProductMobileFilter() {
                     </div>
                     <div className="space-y-2">
                         <h3 className="filter-heading-mobile">Category</h3>
-                        <ProductCategoryMenu />
+                        <ProductCategoryMenu setSelectedCategory={setSelectedCategory} />
                     </div>
                     <div className="space-y-2">
                         <h3 className="filter-heading-mobile">Platform</h3>
                         <div className="space-y-2">
-                            <CustomCheckBox text={"B2B"} idName={"b2b"} checkedStatus={false} />
-                            <CustomCheckBox text={"Marketplace"} idName={"marketplace"} checkedStatus={false} />
+                            <CustomCheckBox text={"B2B"} value={"b2b"} func={handleChange} />
+                            <CustomCheckBox text={"Marketplace"} value={"marketplace"} func={handleChange}/>
                         </div>
                     </div>
                 </SheetContent>

@@ -1,6 +1,8 @@
 import { type ClassValue, clsx } from "clsx"
 import { twMerge } from "tailwind-merge"
 
+export const url = `https://api-dev-konteks.santrichain.id/api/v1/catalogue`;
+
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
@@ -14,4 +16,14 @@ export function formatToIDR(amount: number) {
     }).format(amount);
 }
 
-export const url = `https://api-dev-konteks.santrichain.id/api/v1/catalogue`;
+export function handleCheckboxChange(e: React.MouseEvent<HTMLButtonElement>, setState: React.Dispatch<React.SetStateAction<string[]>>) {
+    const target = e.target as HTMLButtonElement;
+    const checked = target.ariaChecked
+    const value = target.value
+
+    if (checked != 'true') {
+        setState((prev) => [ ...prev, value ])
+    } else {
+        setState((prev) => [ ...prev.filter(item => item != value) ])
+    }
+}

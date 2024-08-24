@@ -16,10 +16,23 @@ export default function ProductSection({ products, totalPage }:{ products: Produ
     const [ selectedSortOption, setSelectedSortOption ] = useState<string>('-stock')
     const [ selectedPage, setSelectedPage ] = useState<number>(1)
     const [ selectedTotalPage, setSelectedTotalPage ] = useState<number>(totalPage)
+    const [ selectedPlatform, setSelectedPlatform ] = useState<string[]>([])
+    const [ selectedCategory, setSelectedCategory ] = useState<string[]>([])
     
-    async function fetchProducts(limit?: number, sortOption?: string, page?: number) {
+    async function fetchProducts(platform: string[] | [], category: string[] | [], limit?: number, sortOption?: string, page?: number) {
         try {
-            const res = await fetch(`${url}?category=kebutuhan-rumah&page=${ page != undefined && page > 0 && page <= selectedTotalPage ? page?.toString() : 1 }&limit=${limit}&sort_by=${sortOption}&platform=b2b`)
+            let completeURL = `${url}?page=${ page != undefined && page > 0 && page <= selectedTotalPage ? page?.toString() : 1 }&limit=${limit}&sort_by=${sortOption}`
+            if (selectedPlatform.length == 1) {
+                completeURL += `&platform=${platform[0]}`
+            } 
+
+            if (selectedCategory.length > 0 && selectedCategory.length < 4) {
+                for (const item of category) {
+                    completeURL += `&category=${item}`
+                }
+            }
+
+            const res = await fetch(completeURL)
             const data = await res.json()
             if (res.ok) {
                 setProductData(data.data.products)
@@ -35,9 +48,8 @@ export default function ProductSection({ products, totalPage }:{ products: Produ
     }
 
     useEffect(() => {
-        fetchProducts(selectedLimit, selectedSortOption, selectedPage)
-
-    }, [ selectedLimit, selectedSortOption, selectedPage ])
+        fetchProducts(selectedPlatform, selectedCategory, selectedLimit, selectedSortOption, selectedPage)
+    }, [ selectedLimit, selectedSortOption, selectedPage, selectedPlatform, selectedCategory ])
     
 
     return (
@@ -46,6 +58,8 @@ export default function ProductSection({ products, totalPage }:{ products: Produ
                 <div className="md:sticky md:top-24 max-md:border-b-[1px] md:border-[1px] border-black/60 md:rounded-sm h-fit overflow-hidden">
                     <ProductFilter 
                         selectedSortOption={selectedSortOption} setSelectedSortOption={setSelectedSortOption} 
+                        setSelectedPlatform={setSelectedPlatform}
+                        setSelectedCategory={setSelectedCategory}
                     />
                 </div>
             </div>
