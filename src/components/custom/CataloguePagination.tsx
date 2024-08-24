@@ -38,8 +38,19 @@ export function CataloguePagination({ selectedPage, setSelectedPage, selectedTot
                     </PaginationItem>
                 }
                 {
-                    selectedPage > 1 &&
+                    selectedPage - 3 >= 1 &&
+                    <>
+                    <PaginationItem onClick={(value) => setSelectedPage(Number((value.target as HTMLLinkElement).innerText))}>
+                        <PaginationLink href="#">1</PaginationLink>
+                    </PaginationItem>
                     <PaginationItem>
+                        <PaginationEllipsis />
+                    </PaginationItem>
+                    </>
+                }
+                {
+                    selectedPage > 1 &&
+                    <PaginationItem onClick={handlePrev}>
                         <PaginationLink href="#">{ selectedPage - 1 }</PaginationLink>
                     </PaginationItem>
                 }
@@ -48,17 +59,17 @@ export function CataloguePagination({ selectedPage, setSelectedPage, selectedTot
                 </PaginationItem>
                 {
                     selectedPage != selectedTotalPage &&
-                    <PaginationItem>
+                    <PaginationItem onClick={handleNext}>
                         <PaginationLink href="#">{ selectedPage + 1 }</PaginationLink>
                     </PaginationItem>
                 }
                 {
-                    selectedPage + 3 == selectedTotalPage &&
+                    selectedPage + 3 <= selectedTotalPage &&
                     <>
                     <PaginationItem>
                         <PaginationEllipsis />
                     </PaginationItem>
-                    <PaginationItem>
+                    <PaginationItem onClick={(value) => setSelectedPage(Number((value.target as HTMLLinkElement).innerText))}>
                         <PaginationLink href="#">{ selectedTotalPage }</PaginationLink>
                     </PaginationItem>
                     </>
