@@ -1,22 +1,46 @@
-import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import React from "react"
 
 export default function ProductSortFilter({ selectedSortOption, setSelectedSortOption }: { selectedSortOption:string, setSelectedSortOption:any }) {
+
+    const sortList = [
+        {
+            text: 'Availability',
+            value: '-stock'
+        },
+        {
+            text: 'Price (High - Low)',
+            value: '-price'
+        },
+        {
+            text: 'Price (Low - High)',
+            value: 'price'
+        },
+        {
+            text: 'A - Z',
+            value: 'name'
+        },
+        {
+            text: 'Z - A',
+            value: '-name'
+        },
+    ]
+
     return (
         <div className="flex items-center gap-2">
             <span>Sort by:</span>
-            <Select onValueChange={(value) => setSelectedSortOption(value)} defaultValue={selectedSortOption}>
+            <Select onValueChange={(value) => setSelectedSortOption(value)} value={selectedSortOption}>
                 <SelectTrigger className="w-[180px]">
-                    <SelectValue placeholder="Availability"/>
+                    <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
                     <SelectGroup>
-                        <SelectItem value="-stock">Availability</SelectItem>
-                        <SelectItem value="-price">Price (High - Low)</SelectItem>
-                        <SelectItem value="price">Price (Low - High)</SelectItem>
-                        <SelectItem value="name">A - Z</SelectItem>
-                        <SelectItem value="-name">Z - A</SelectItem>
+                        {
+                            sortList.map((item: { text: string, value: string }, idx: number) => {
+                                return <div key={idx}>
+                                    <SelectItem value={item.value}>{ item.text }</SelectItem>
+                                </div>
+                            })
+                        }
                     </SelectGroup>
                 </SelectContent>
             </Select>

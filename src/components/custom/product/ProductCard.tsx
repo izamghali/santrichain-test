@@ -88,7 +88,7 @@ export function ProductCard(
                     stock != 0 && slashPrice != undefined ?
                     <div className=" ">
                         <div className="flex items-center gap-1">
-                            <p className="bg-orange-200 p-1 text-xs rounded-sm">{ slashPrice == price ? Math.round(100 - (price / addedPrice * 100)) : price == 0 ? Math.round(price / slashPrice * 100) : 'Free' }% OFF</p>
+                            <p className="bg-orange-200 p-1 text-xs rounded-sm">{ slashPrice == price ? Math.round(100 - (price / addedPrice * 100)) : price != 0 ? Math.round(price / slashPrice * 100) : 'Free' }% OFF</p>
                             <p className="text-xs line-through text-black/40">{ formatToIDR( slashPrice == price ? addedPrice : slashPrice ) }</p>
                         </div>
                         <p className="font-bold ">{ price != 0 ? formatToIDR( price ) : 'Free' }</p>

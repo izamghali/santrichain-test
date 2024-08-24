@@ -50,16 +50,15 @@ export default function ProductSection({ products, totalPage }:{ products: Produ
     useEffect(() => {
         fetchProducts(selectedPlatform, selectedCategory, selectedLimit, selectedSortOption, selectedPage)
     }, [ selectedLimit, selectedSortOption, selectedPage, selectedPlatform, selectedCategory ])
-    
 
     return (
         <div className="flex justify-center max-md:flex-col py-8">
             <div className="sticky top-[8.36rem] z-10">
-                <div className="md:sticky md:top-24 max-md:border-b-[1px] md:border-[1px] border-black/60 md:rounded-sm h-fit overflow-hidden">
+                <div className="md:sticky md:top-24 max-md:border-b-[1px] md:border-[1px] border-black/60 md:max-w-64 md:rounded-sm h-fit overflow-hidden">
                     <ProductFilter 
                         selectedSortOption={selectedSortOption} setSelectedSortOption={setSelectedSortOption} 
-                        setSelectedPlatform={setSelectedPlatform}
-                        setSelectedCategory={setSelectedCategory}
+                        selectedPlatform={selectedPlatform} setSelectedPlatform={setSelectedPlatform}
+                        selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory}
                     />
                 </div>
             </div>

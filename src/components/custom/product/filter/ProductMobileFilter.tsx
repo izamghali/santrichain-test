@@ -4,7 +4,7 @@ import { Sheet, SheetContent, SheetDescription, SheetTitle, SheetTrigger } from 
 import CustomCheckBox from "@/components/dynamic/CustomCheckBox"
 import { handleCheckboxChange } from "@/lib/utils"
 
-export default function ProductMobileFilter({ setSelectedPlatform, setSelectedCategory }: { setSelectedPlatform:React.Dispatch<React.SetStateAction<string[]>>, setSelectedCategory: React.Dispatch<React.SetStateAction<string[]>> }) {
+export default function ProductMobileFilter({ selectedPlatform, setSelectedPlatform, selectedCategory, setSelectedCategory }: { selectedPlatform: string[], setSelectedPlatform:React.Dispatch<React.SetStateAction<string[]>>, selectedCategory: string[], setSelectedCategory: React.Dispatch<React.SetStateAction<string[]>> }) {
 
     function handleChange(e: React.MouseEvent<HTMLButtonElement>) {
         handleCheckboxChange(e, setSelectedPlatform)
@@ -23,13 +23,13 @@ export default function ProductMobileFilter({ setSelectedPlatform, setSelectedCa
                     </div>
                     <div className="space-y-2">
                         <h3 className="filter-heading-mobile">Category</h3>
-                        <ProductCategoryMenu setSelectedCategory={setSelectedCategory} />
+                        <ProductCategoryMenu selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory} />
                     </div>
                     <div className="space-y-2">
                         <h3 className="filter-heading-mobile">Platform</h3>
                         <div className="space-y-2">
-                            <CustomCheckBox text={"B2B"} value={"b2b"} func={handleChange} />
-                            <CustomCheckBox text={"Marketplace"} value={"marketplace"} func={handleChange}/>
+                            <CustomCheckBox isChecked={ selectedPlatform.includes('b2b') ? true: false } text={"B2B"} value={"b2b"} func={handleChange} />
+                            <CustomCheckBox isChecked={ selectedPlatform.includes('marketplace') ? true: false } text={"Marketplace"} value={"marketplace"} func={handleChange}/>
                         </div>
                     </div>
                 </SheetContent>

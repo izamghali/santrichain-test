@@ -1,8 +1,26 @@
 import CustomCheckBox from "@/components/dynamic/CustomCheckBox"
 import { handleCheckboxChange } from "@/lib/utils"
-import React from "react"
 
-export default function ProductCategoryMenu({ setSelectedCategory }: { setSelectedCategory: React.Dispatch<React.SetStateAction<string[]>> }) {
+export default function ProductCategoryMenu({ selectedCategory, setSelectedCategory }: { selectedCategory: string[], setSelectedCategory: React.Dispatch<React.SetStateAction<string[]>> }) {
+
+    const categoryList = [
+        {
+            text: "Sembako",
+            value: "sembako"
+        },
+        {
+            text: "Kesehatan",
+            value: "kesehatan"
+        },
+        {
+            text: "Kebutuhan Rumah",
+            value: "kebutuhan-rumah"
+        },
+        {
+            text: "Makanan dan Minuman",
+            value: "makanan-dan-minuman"
+        },
+    ]
 
     function handleChange(e: React.MouseEvent<HTMLButtonElement>) {
         handleCheckboxChange(e, setSelectedCategory)
@@ -11,10 +29,19 @@ export default function ProductCategoryMenu({ setSelectedCategory }: { setSelect
     return (
         <>
             <div className="space-y-2">
-                <CustomCheckBox text={"Sembako"} value={"sembako"} func={handleChange}/>
-                <CustomCheckBox text={"Kesehatan"} value={"kesehatan"} func={handleChange}/>
-                <CustomCheckBox text={"Kebutuhan Rumah"} value={"kebutuhan-rumah"} func={handleChange}/>
-                <CustomCheckBox text={"Makanan dan Minuman"} value={"makanan-dan-minuman"} func={handleChange}/>
+                {
+                    categoryList.map((item: { text:string, value: string }, idx: number) => {
+                        if (selectedCategory.includes(item.value)) {
+                            return <div key={idx}>
+                                <CustomCheckBox isChecked={true} text={item.text} value={item.value} func={handleChange}/>
+                            </div>
+                        } else {
+                            return <div key={idx}>
+                                <CustomCheckBox isChecked={false} text={item.text} value={item.value} func={handleChange}/>
+                            </div>
+                        }
+                    })
+                }
             </div>
         </>
     )
