@@ -40,8 +40,8 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
     }, [emblaMainApi, onSelect])
 
     return (
-        <div className="embla " style={{margin: '0px'}}>
-            <div className="embla__viewport w-[21rem]" ref={emblaMainRef}>
+        <div className="embla max-md:w-full" style={{margin: '0px'}}>
+            <div className="embla__viewport w-[21rem] max-md:w-full" ref={emblaMainRef}>
                 <div className="embla__container">
                 {slides.map((index) => (
                     <div className="embla__slide" key={index}>

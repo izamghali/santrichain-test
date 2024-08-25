@@ -43,10 +43,8 @@ export default function ProductBlock(
                                     imgUrl={product.image_urls[0]}
                                     slug={product.slug}
                                     price={product?.price_range?.min || product.price || 0}
-                                    // price={product.stock != 0 || product.price != null ? product.price_range.min || product.price : 0}
                                     slashPrice={product.price_range?.max || product.price || 0}
-                                    // slashPrice={product.stock != 0 ? product.price_range.min_slash || product.price_range.max : 0}
-                                    stock={product.stock}                           />
+                                    stock={product.stock}/>
                             </div>
                         })
                     :
@@ -63,7 +61,7 @@ export default function ProductBlock(
                 }
             </div>
 
-            <div className="max-md:hidden">
+            <div className="">
                 <CataloguePagination selectedPage={selectedPage} setSelectedPage={setSelectedPage} selectedTotalPage={selectedTotalPage} />
             </div>
         </div>

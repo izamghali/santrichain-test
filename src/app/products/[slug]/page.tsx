@@ -53,7 +53,7 @@ export default async function Page(params : { params: { slug: string } }) {
     
     return (
         <div className="flex justify-center">
-            <div className="std-max-w w-full p-4 flex max-md:flex-col gap-8">
+            <div className="std-max-w w-full p-4 flex max-md:flex-col justify-between gap-8 ">
                 <div className="space-y-4">
                     <Breadcrumb>
                         <BreadcrumbList>
@@ -70,47 +70,17 @@ export default async function Page(params : { params: { slug: string } }) {
                             </BreadcrumbItem>
                         </BreadcrumbList>
                     </Breadcrumb>
-                    <div className="flex max-sm:justify-center">
+                    <div className="flex max-sm:justify-center ">
                         <EmblaCarousel slides={SLIDES} options={OPTIONS} />
                     </div>
-                    {/* <div className="flex flex-col gap-2">
-                        <div className="w-[22rem] h-[22rem] border-[1px] border-gray-300 rounded-sm overflow-hidden">
-                            {
-                                product?.image_urls[0] && isImageAvailable ?
-                                <Image priority width={900} height={900} className={`object-cover w-full h-full ${ product?.stock == 0 ? 'grayscale' :'' }`} src={product?.image_urls[0]} alt={product?.name} />
-                                :
-                                <div className="flex flex-col relative bg-gray-100">
-                                    <PiLego className="p-10 md:p-16 w-96 h-96 fill-black/60" />
-                                    <span className="text-center w-full absolute bottom-2 text-black/60">Image not available</span>
-                                </div>
-                            }
-                        </div>
-                        <div className="max-lg:hidden border-2 border-green-400 w-[22rem]">
-                            <Carousel orientation="horizontal" className="">
-                                <CarouselContent className="max-h-96 space-y-0 flex">
-                                    {Array.from({ length: 3 }).map((_, index) => (
-                                    <CarouselItem key={index} className="w-full h-full p-0 m-0">
-                                        <div className="">
-                                            <Card>
-                                                <CardContent className="flex items-center justify-center p-6">
-                                                <span className="text-2xl font-semibold">{index + 1}</span>
-                                                </CardContent>
-                                            </Card>
-                                        </div>
-                                    </CarouselItem>
-                                    ))}
-                                </CarouselContent>
-                            </Carousel>
-                        </div>
-                    </div> */}
                     <h1 className="font-bold text-2xl lg:text-3xl">{ product?.name }</h1>
                 </div>
-                <div className="flex gap-8 max-lg:flex-col">
-                    <div className="p-4 py-8 border-2 border-red-400 min-w-72">
+                <div className="flex gap-8 max-lg:flex-col w-full">
+                    <div className="p-4 py-8 max-md:py-4 xs:min-w-72 w-full">
                         <h2 className="font-semibold text-lg">Description</h2>
                         <p className="text-black/60">{ product?.short_description }</p>
                     </div>
-                    <div className="min-w-72 border-[1px] h-96">
+                    <div className="xs:min-w-72 border-[1px] w-full">
 
                     </div>
 
@@ -119,3 +89,17 @@ export default async function Page(params : { params: { slug: string } }) {
         </div>
     )
 }
+
+                    // <div className="flex flex-col gap-2">
+                    //     <div className="w-[22rem] h-[22rem] border-[1px] border-gray-300 rounded-sm overflow-hidden">
+                    //         {
+                    //             product?.image_urls[0] && isImageAvailable ?
+                    //             <Image priority width={900} height={900} className={`object-cover w-full h-full ${ product?.stock == 0 ? 'grayscale' :'' }`} src={product?.image_urls[0]} alt={product?.name} />
+                    //             :
+                    //             <div className="flex flex-col relative bg-gray-100">
+                    //                 <PiLego className="p-10 md:p-16 w-96 h-96 fill-black/60" />
+                    //                 <span className="text-center w-full absolute bottom-2 text-black/60">Image not available</span>
+                    //             </div>
+                    //         }
+                    //     </div>
+                    // </div>

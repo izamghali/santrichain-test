@@ -12,7 +12,7 @@ export const Thumb: React.FC<PropType> = (props) => {
   return (
     <div
     style={{padding: '0px', margin: '0px'}}
-      className={'border-[1px] rounded-sm w-full h-20'.concat(
+      className={'border-[1px] rounded-sm  max-sm:w-16 max-sm:h-16 w-20 h-20'.concat(
         selected ? ' embla-thumbs__slide--selected' : ''
       )}
     >
