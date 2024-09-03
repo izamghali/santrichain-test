@@ -7,6 +7,8 @@ import { Toaster } from "sonner"
 import { toast } from "sonner"
 import { useRouter } from "next/navigation"
 import { url } from "@/lib/utils"
+import { Button } from "@/components/ui/button"
+import { ArrowUp } from "lucide-react"
 
 export default function ProductSection({ products, totalPage }:{ products: Product[], totalPage: number }) {
     
@@ -18,6 +20,8 @@ export default function ProductSection({ products, totalPage }:{ products: Produ
     const [ selectedTotalPage, setSelectedTotalPage ] = useState<number>(totalPage)
     const [ selectedPlatform, setSelectedPlatform ] = useState<string[]>([])
     const [ selectedCategory, setSelectedCategory ] = useState<string[]>([])
+    const [ atBottom, setAtBottom ] = useState<boolean>(false)
+    const [ totalProduct, setTotalProduct ] = useState<number>(0)
     
     async function fetchProducts(platform: string[] | [], category: string[] | [], limit?: number, sortOption?: string, page?: number) {
         try {
@@ -37,6 +41,7 @@ export default function ProductSection({ products, totalPage }:{ products: Produ
             if (res.ok) {
                 setProductData(data.data.products)
                 setSelectedTotalPage(data.data.total_pages)
+                setTotalProduct(data.data.total)
                 router.refresh()
             } else {
                 toast.error('Error fetching products!')    
@@ -51,6 +56,24 @@ export default function ProductSection({ products, totalPage }:{ products: Produ
         fetchProducts(selectedPlatform, selectedCategory, selectedLimit, selectedSortOption, selectedPage)
     }, [ selectedLimit, selectedSortOption, selectedPage, selectedPlatform, selectedCategory ])
 
+    useEffect(() => {
+        let mobileScreen = window.matchMedia("(max-width: 550px)")
+        window.onscroll = function() {
+            const scrolledTo = window.scrollY + window.innerHeight;
+            const isReachBottom = document.body.scrollHeight === scrolledTo;
+            if (mobileScreen.matches) {
+                if (isReachBottom) {
+                    setAtBottom(true)
+                    setSelectedLimit((prev: number) => prev + 2)
+                } else setAtBottom(false)
+    
+                if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
+                    document.getElementById('scroll-up-btn')?.classList.remove('hidden')
+                } else document.getElementById('scroll-up-btn')?.classList.add('hidden')
+            }
+        }
+    }, [])
+
     return (
         <div className="flex justify-center max-md:flex-col py-8">
             <div className="sticky top-[8.36rem] z-10">
@@ -63,11 +86,13 @@ export default function ProductSection({ products, totalPage }:{ products: Produ
                 </div>
             </div>
             <ProductBlock products={ productData } 
-                setSelectedLimit={setSelectedLimit} 
+                selectedLimit={selectedLimit} setSelectedLimit={setSelectedLimit} 
                 selectedSortOption={selectedSortOption} setSelectedSortOption={setSelectedSortOption}
                 selectedPage={selectedPage} setSelectedPage={setSelectedPage}
                 selectedTotalPage={selectedTotalPage}
+                atBottom={atBottom} totalProduct={totalProduct}
             />
+            <Button className="hidden fixed bottom-2 right-2 z-10 w-10 h-10 p-2" id="scroll-up-btn" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}><ArrowUp /></Button>
             <Toaster position="top-center" richColors />
         </div>
     )

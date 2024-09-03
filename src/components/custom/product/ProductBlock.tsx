@@ -7,10 +7,11 @@ import ProductSortFilter from "./filter/ProductSortFilter"
 import { CataloguePagination } from "../CataloguePagination"
 import ProductMobileSortFilter from "./filter/ProductMobileSortFilter"
 import CustomPagination from "../CustomPagination"
+import { Spinner } from "@/components/ui/spinner"
 
 export default function ProductBlock(
-    { products, setSelectedLimit, selectedSortOption, setSelectedSortOption, selectedPage, setSelectedPage, selectedTotalPage }: 
-    { products: Product[], setSelectedLimit: any, selectedSortOption: string, setSelectedSortOption:any, selectedPage: number, setSelectedPage:any, selectedTotalPage: number }) {
+    { products, selectedLimit, setSelectedLimit, selectedSortOption, setSelectedSortOption, selectedPage, setSelectedPage, selectedTotalPage, atBottom, totalProduct }: 
+    { products: Product[], selectedLimit: number, setSelectedLimit: any, selectedSortOption: string, setSelectedSortOption:any, selectedPage: number, setSelectedPage:any, selectedTotalPage: number, atBottom: boolean, totalProduct: number }) {
 
     const [ isLoading, setIsLoading ] = useState(false);
 
@@ -62,9 +63,18 @@ export default function ProductBlock(
                 }
             </div>
 
-            <div className="">
+            <div className="max-sm:hidden">
                 {/* <CataloguePagination selectedPage={selectedPage} setSelectedPage={setSelectedPage} selectedTotalPage={selectedTotalPage} /> */}
                 <CustomPagination selectedPage={selectedPage} setSelectedPage={setSelectedPage} selectedTotalPage={selectedTotalPage} />
+            </div>
+
+            <div className="sm:hidden">
+                {
+                    atBottom && totalProduct != selectedLimit ?
+                        <Spinner />
+                    :
+                    <></>
+                }
             </div>
         </div>
     )
