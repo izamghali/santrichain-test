@@ -6,6 +6,7 @@ import ProductLimitFilter from "./filter/ProductLimitFilter"
 import ProductSortFilter from "./filter/ProductSortFilter"
 import { CataloguePagination } from "../CataloguePagination"
 import ProductMobileSortFilter from "./filter/ProductMobileSortFilter"
+import CustomPagination from "../CustomPagination"
 
 export default function ProductBlock(
     { products, setSelectedLimit, selectedSortOption, setSelectedSortOption, selectedPage, setSelectedPage, selectedTotalPage }: 
@@ -62,7 +63,8 @@ export default function ProductBlock(
             </div>
 
             <div className="">
-                <CataloguePagination selectedPage={selectedPage} setSelectedPage={setSelectedPage} selectedTotalPage={selectedTotalPage} />
+                {/* <CataloguePagination selectedPage={selectedPage} setSelectedPage={setSelectedPage} selectedTotalPage={selectedTotalPage} /> */}
+                <CustomPagination selectedPage={selectedPage} setSelectedPage={setSelectedPage} selectedTotalPage={selectedTotalPage} />
             </div>
         </div>
     )
