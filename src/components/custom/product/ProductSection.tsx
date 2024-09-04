@@ -49,7 +49,6 @@ export default function ProductSection({ products, totalPage }:{ products: Produ
         } catch (error) {
             toast.error(error instanceof Error ? error.message : 'Error fetching products!')
         }
-
     }
 
     useEffect(() => {
@@ -57,14 +56,14 @@ export default function ProductSection({ products, totalPage }:{ products: Produ
     }, [ selectedLimit, selectedSortOption, selectedPage, selectedPlatform, selectedCategory ])
 
     useEffect(() => {
-        let mobileScreen = window.matchMedia("(max-width: 550px)")
+        let mobileScreen = window.matchMedia("(max-width: 549px)").matches
         window.onscroll = function() {
             const scrolledTo = window.scrollY + window.innerHeight;
             const isReachBottom = document.body.scrollHeight === scrolledTo;
-            if (mobileScreen.matches) {
+            if (mobileScreen) {
                 if (isReachBottom) {
                     setAtBottom(true)
-                    setSelectedLimit((prev: number) => prev + 2)
+                    // setSelectedLimit((prev: number) => prev + 4)
                 } else setAtBottom(false)
     
                 if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {

@@ -8,6 +8,7 @@ import { CataloguePagination } from "../CataloguePagination"
 import ProductMobileSortFilter from "./filter/ProductMobileSortFilter"
 import CustomPagination from "../CustomPagination"
 import { Spinner } from "@/components/ui/spinner"
+import { Button } from "@/components/ui/button"
 
 export default function ProductBlock(
     { products, selectedLimit, setSelectedLimit, selectedSortOption, setSelectedSortOption, selectedPage, setSelectedPage, selectedTotalPage, atBottom, totalProduct }: 
@@ -68,14 +69,11 @@ export default function ProductBlock(
                 <CustomPagination selectedPage={selectedPage} setSelectedPage={setSelectedPage} selectedTotalPage={selectedTotalPage} />
             </div>
 
-            <div className="sm:hidden">
-                {
-                    atBottom && totalProduct != selectedLimit ?
-                        <Spinner />
-                    :
-                    <></>
-                }
-            </div>
+                {/* {
+                    totalProduct != selectedLimit &&
+                    <Spinner className="sm:hidden" />
+                } */}
+                <div className="flex justify-center"><Button onClick={() => setSelectedLimit((prev: number) => prev + 6) } className="bg-transparent text-black border-black border-[1px] px-8 hover:bg-transparent ">Load More</Button></div>
         </div>
     )
 };
