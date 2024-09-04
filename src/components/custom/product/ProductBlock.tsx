@@ -73,7 +73,7 @@ export default function ProductBlock(
                     totalProduct != selectedLimit &&
                     <Spinner className="sm:hidden" />
                 } */}
-                <div className="flex justify-center"><Button onClick={() => setSelectedLimit((prev: number) => prev + 6) } className="bg-transparent text-black border-black border-[1px] px-8 hover:bg-transparent ">Load More</Button></div>
+                <div className="flex justify-center sm:hidden"><Button onClick={() => setSelectedLimit((prev: number) => prev + 6) } className="bg-transparent text-black border-black border-[1px] px-8 hover:bg-transparent ">Load More</Button></div>
         </div>
     )
 };
