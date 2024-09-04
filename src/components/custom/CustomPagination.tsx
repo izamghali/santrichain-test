@@ -32,12 +32,12 @@ export default function CustomPagination({ selectedPage, setSelectedPage, select
                 }
                 {
                     selectedPage > 1 &&
-                    <div className=" rounded-sm w-10 h-10 flex hover:bg-slate-100 hover:border-slate-100 cursor-pointer justify-center items-center"><span >{ selectedPage - 1 }</span></div>
+                    <SinglePageBtn onClickFunc={handlePrevPage} content={selectedPage - 1} />
                 }
                 <div className="border-[1px] rounded-sm w-10 h-10 hover:bg-slate-100 hover:border-slate-100 flex justify-center items-center"><span >{ selectedPage }</span></div>
                 {
                     selectedPage != selectedTotalPage &&
-                    <SinglePageBtn content={selectedPage + 1} />
+                    <SinglePageBtn onClickFunc={handleNextPage} content={selectedPage + 1} />
                 }
                 {   
                     selectedPage + 3 <= selectedTotalPage &&
